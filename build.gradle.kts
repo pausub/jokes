@@ -19,24 +19,36 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+	// Spring Boot
+	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 
+	// Kotlin
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	// Swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 
+	// Cache
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 
+	// Bucket4j rate limiting
 	implementation("com.github.vladimir-bukhtoyarov:bucket4j-core:7.6.0")
 
+	// Micrometer monitoring
+	implementation("io.micrometer:micrometer-core")
+	implementation("io.micrometer:micrometer-registry-prometheus")
+
+	// Spring Boot test starter
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// Cucumber BDD tests
 	testImplementation("io.cucumber:cucumber-java:7.14.0")
 	testImplementation("io.cucumber:cucumber-junit:7.14.0")
 	testImplementation("io.cucumber:cucumber-spring:7.14.0")
-
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.cucumber:cucumber-junit-platform-engine:7.14.0")
 }
 

@@ -14,22 +14,31 @@ A Spring Boot RESTful application that serves as a proxy to a https://api.chuckn
 - Docker runtime
 - Git
 
-#### To run the app in container:
-
+#### To run the app in container, execute in root directory:
 ```shell
 ./gradlew build
-docker build -t jokes .
+docker build -t jokes -f docker/Dockerfile .
 docker run -p 8080:8080 jokes
 ```
+
+#### To run the app in container together with prometheus and grafana, execute in root directory:
+```shell
+./gradlew build
+docker-compose -f docker/docker-compose.yml up --build
+```
+
 
 ## Useful endpoints for development (most should be disabled in prod)
 
  - Swagger: http://localhost:8080/jokes/swagger-ui/index.html
  - Spring boot actuator endpoints: http://localhost:8080/jokes/actuator
+ - Prometheus: http://localhost:9090/
+ - Grafana: http://localhost:3000/ (admin/admin)
 
 ## Design Assumptions:
 [Assumptions.md](Assumptions.md)
 
 ## And most importantly
 Don't forget the man who made this all possible!
+
 ![Chuck](./readme-resources/chuck.jpeg)
