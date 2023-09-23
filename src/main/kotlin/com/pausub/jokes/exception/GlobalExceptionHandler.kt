@@ -18,6 +18,11 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("Server error: ${exception.message}")
     }
 
+    @ExceptionHandler(RateLimitExceededException::class)
+    fun handleRateLimitException(exception: RateLimitExceededException): ResponseEntity<String> {
+        return ResponseEntity(exception.message, HttpStatus.TOO_MANY_REQUESTS)
+    }
+
     @ExceptionHandler(RuntimeException::class)
     fun handleGenericException(exception: RuntimeException): ResponseEntity<String> {
         logger.error("Internal server error: ${exception.message}", exception)

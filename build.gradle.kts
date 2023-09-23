@@ -30,6 +30,8 @@ dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 
+	implementation("com.github.vladimir-bukhtoyarov:bucket4j-core:7.6.0")
+
 	testImplementation("io.cucumber:cucumber-java:7.14.0")
 	testImplementation("io.cucumber:cucumber-junit:7.14.0")
 	testImplementation("io.cucumber:cucumber-spring:7.14.0")

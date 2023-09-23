@@ -1,5 +1,7 @@
 #### Monitoring:
-Exposed via Spring actuator endpoints TODO:
+Exposed via Spring actuator endpoints 
+
+TODO:
 
 #### Logging: 
 Request/Response logging - spring default
@@ -14,7 +16,7 @@ Prefer having unit, api, e2e/integration tests. E2e vs integration testing (mock
 #### Containerization:
 Single docker container used for running the application. Real world applications, would most likely use additional containers for database, caching, message brokers, monitoring or else. Omitted for simplification reasons. Would use Docker Compose to manage multiple containers.
 
-#### Version control
+#### Version control:
 Prefer using Git feature branch workflow. Jokes project too simple to properly demonstrate
 
 #### HTTP client:
@@ -24,12 +26,16 @@ Used Spring RestTemplate for simplicity, in prod would use Spring WebClient, wou
 Simple design according to REST standards, mimic api.chucknorris.io
 
 #### Scalability and Performance:
-TODO:
+In order to measure application performance and to evaluate implemented optimisations Load/Stress tests should be implemented (could use Apache JMeter, Gatling or similar)
+Also caching, load balancing, non-blocking io. No database integration makes it easier to scale the application.
+
+#### Rate limiting:
+Would be a good idea to consider request rate limiting per user and per application using Bucket4j or Guava's RateLimiter.
 
 #### External API Stability:
-TODO:
+Depending on requirements - async processing, retry strategies, queuing of requests could be implemented to reduce failure to respond. 
 
-#### Project structure
+#### Project structure:
 Feature based (classes grouped by feature) over structure based (packages grouped by application layer) packaging for better code organization when code base grows
 
 #### Data Validation/Sanitation:
