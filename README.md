@@ -26,3 +26,10 @@ docker run -p 8080:8080 jokes
 
  - Swagger: http://localhost:8080/jokes/swagger-ui/index.html
  - Spring boot actuator endpoints: http://localhost:8080/jokes/actuator
+
+## Design Assumptions:
+[Assumptions.md](Assumptions.md)
+
+## And most importantly
+Don't forget the man who made this all possible!
+![Chuck](./readme-resources/chuck.jpeg)
