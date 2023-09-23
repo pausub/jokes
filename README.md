@@ -9,7 +9,18 @@ A Spring Boot RESTful application that serves as a proxy to a https://api.chuckn
 
 ## Build & Run
 
-TODO:
+#### Make sure you have the following tools installed on your machine:
+- JDK
+- Docker runtime
+- Git
+
+#### To run the app in container:
+
+```shell
+./gradlew build
+docker build -t jokes .
+docker run -p 8080:8080 jokes
+```
 
 ## Useful endpoints for development (most should be disabled in prod)
 
