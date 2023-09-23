@@ -29,13 +29,33 @@ class JokesControllerApiTest {
 
         val expectedResponse = """
             {
-                "category": ["dev"],
+                "categories": ["dev"],
                 "id": "123",
                 "value": "Sample joke"
             }
         """.trimIndent()
 
-        mockMvc.perform(get("/jokes/random"))
+        mockMvc.perform(get("/random"))
+            .andExpect(status().isOk)
+            .andExpect(content().contentType(APPLICATION_JSON))
+            .andExpect(content().json(expectedResponse))
+    }
+
+    @Test
+    fun `should fetch random joke by category`() {
+
+        val joke = Joke(setOf("dev"), "123", "Sample joke")
+        `when`(jokeService.getRandomJoke("dev")).thenReturn(joke)
+
+        val expectedResponse = """
+            {
+                "categories": ["dev"],
+                "id": "123",
+                "value": "Sample joke"
+            }
+        """.trimIndent()
+
+        mockMvc.perform(get("/random?category=dev"))
             .andExpect(status().isOk)
             .andExpect(content().contentType(APPLICATION_JSON))
             .andExpect(content().json(expectedResponse))
@@ -51,7 +71,7 @@ class JokesControllerApiTest {
             ["dev", "movie"]
         """.trimIndent()
 
-        mockMvc.perform(get("/jokes/categories"))
+        mockMvc.perform(get("/categories"))
             .andExpect(status().isOk)
             .andExpect(content().contentType(APPLICATION_JSON))
             .andExpect(content().json(expectedResponse))
@@ -65,19 +85,19 @@ class JokesControllerApiTest {
         val expectedResponse = """
             [
                 {
-                    "category": ["dev"],
+                    "categories": ["dev"],
                     "id": "123",
                     "value": "Sample joke"
                 },
                 {
-                    "category": ["dev"],
+                    "categories": ["dev"],
                     "id": "1234",
                     "value": "Sample joke 2"
                 }
             ]
         """.trimIndent()
 
-        mockMvc.perform(get("/jokes/search").param("query", "joke"))
+        mockMvc.perform(get("/search").param("query", "joke"))
             .andExpect(status().isOk)
             .andExpect(content().contentType(APPLICATION_JSON))
             .andExpect(content().json(expectedResponse))

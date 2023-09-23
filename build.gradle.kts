@@ -21,9 +21,19 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+
+	testImplementation("io.cucumber:cucumber-java:7.14.0")
+	testImplementation("io.cucumber:cucumber-junit:7.14.0")
+	testImplementation("io.cucumber:cucumber-spring:7.14.0")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.cucumber:cucumber-junit-platform-engine:7.14.0")
 }
 
 tasks.withType<KotlinCompile> {

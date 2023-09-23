@@ -29,7 +29,7 @@ class JokesServiceUnitTest {
 
         assertEquals("id", result.id)
         assertEquals("value", result.value)
-        assertTrue(result.category.contains("category"))
+        assertTrue(result.categories.contains("category"))
     }
 
     @Test
@@ -43,8 +43,8 @@ class JokesServiceUnitTest {
         val result = jokesService.searchJokes("test")
 
         assertEquals(2, result.size)
-        assertTrue(result.any { it.id == "id1" && it.value == "value1" && it.category.contains("category1") })
-        assertTrue(result.any { it.id == "id2" && it.value == "value2" && it.category.contains("category2") })
+        assertTrue(result.any { it.id == "id1" && it.value == "value1" && it.categories.contains("category1") })
+        assertTrue(result.any { it.id == "id2" && it.value == "value2" && it.categories.contains("category2") })
     }
 
     @Test

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.core.ParameterizedTypeReference
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -16,23 +18,32 @@ class JokesEndToEndTest {
 
 	@Test
 	fun `should fetch random joke`() {
-		val response = restTemplate.getForEntity("/jokes/random", Joke::class.java)
+		val response = restTemplate.getForEntity("/random", Joke::class.java)
 		assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
-		assertThat(response.body)
+		assertThat(response.body).isNotNull
+	}
+
+	@Test
+	fun `should fetch random joke by category`() {
+		val response = restTemplate.getForEntity("/random?category=dev", Joke::class.java)
+		assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
+		assertThat(response.body?.categories?.contains("dev")).isTrue()
 	}
 
 	@Test
 	fun `should fetch all categories`() {
-		val response = restTemplate.getForEntity("/jokes/categories", Set::class.java)
+		val response = restTemplate.getForEntity("/categories", Set::class.java)
 		assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
 		assertThat(response.body).hasSizeGreaterThan(0)
 	}
 
 	@Test
 	fun `should search jokes`() {
-		val response = restTemplate.getForEntity("/jokes/search?query=joke", Set::class.java)
+		val responseType = object : ParameterizedTypeReference<Set<Joke>>() {}
+		val response = restTemplate.exchange("/search?query=mugger", HttpMethod.GET, null, responseType)
 		assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
 		assertThat(response.body).hasSizeGreaterThan(0)
+		assertThat(response.body?.all { it.value.contains("mugger") }).isTrue()
 	}
 
 }

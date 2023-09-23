@@ -5,7 +5,7 @@ import com.pausub.jokes.api.model.Joke
 
 fun ChuckJoke.toJoke(): Joke {
     return Joke(
-        category = categories.toSet(),
+        categories = categories.toSet(),
         id = id,
         value = value
     )

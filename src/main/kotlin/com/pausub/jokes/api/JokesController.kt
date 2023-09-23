@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class JokesController(private val jokeService: JokesService) {
 
-    @GetMapping("/jokes/random")
+    @GetMapping("/random")
     fun getRandomJoke(@RequestParam(name = "category", required = false) category: String?): Joke {
         return jokeService.getRandomJoke(category)
     }
 
-    @GetMapping("/jokes/categories")
+    @GetMapping("/categories")
     fun getAllCategories(): Set<String> {
         return jokeService.getAllCategories()
     }
 
-    @GetMapping("/jokes/search")
+    @GetMapping("/search")
     fun searchJokes(@RequestParam(name = "query") query: String): Set<Joke> {
         return jokeService.searchJokes(query)
     }
