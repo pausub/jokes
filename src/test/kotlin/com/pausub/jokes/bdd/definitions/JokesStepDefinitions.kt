@@ -1,6 +1,6 @@
 package com.pausub.jokes.bdd.definitions
 
-import com.pausub.jokes.api.model.Joke
+import com.pausub.jokes.api.model.JokeResponse
 import io.cucumber.java.en.And
 import io.cucumber.java.en.When
 import io.cucumber.spring.CucumberContextConfiguration
@@ -20,17 +20,17 @@ class JokesStepDefinitions {
     private lateinit var restTemplate: TestRestTemplate
 
     private var categoryResponse: ResponseEntity<Set<*>>? = null
-    private var jokeResponse: ResponseEntity<Joke>? = null
-    private var jokesResponse: ResponseEntity<Set<Joke>>? = null
+    private var jokeResponse: ResponseEntity<JokeResponse>? = null
+    private var jokesResponse: ResponseEntity<Set<JokeResponse>>? = null
 
     @When("user fetch a random joke")
     fun userFetchARandomJoke() {
-        jokeResponse = restTemplate.getForEntity("/random", Joke::class.java)
+        jokeResponse = restTemplate.getForEntity("/random", JokeResponse::class.java)
     }
 
     @When("user fetch a random joke by given category")
     fun userFetchARandomJokeByGivenCategory() {
-        jokeResponse = restTemplate.getForEntity("/random?category=dev", Joke::class.java)
+        jokeResponse = restTemplate.getForEntity("/random?category=dev", JokeResponse::class.java)
     }
 
     @And("user should receive a joke with given category")
@@ -45,7 +45,7 @@ class JokesStepDefinitions {
 
     @When("user search for jokes with the query {string}")
     fun userSearchForJokesWithTheQuery(query: String) {
-        val responseType = object : ParameterizedTypeReference<Set<Joke>>() {}
+        val responseType = object : ParameterizedTypeReference<Set<JokeResponse>>() {}
         jokesResponse = restTemplate.exchange("/search?query=$query", HttpMethod.GET, null, responseType)
     }
 

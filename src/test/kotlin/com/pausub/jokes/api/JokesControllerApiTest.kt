@@ -1,6 +1,6 @@
 package com.pausub.jokes.api
 
-import com.pausub.jokes.api.model.Joke
+import com.pausub.jokes.api.model.JokeResponse
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,8 +24,8 @@ class JokesControllerApiTest {
     @Test
     fun `should fetch random joke`() {
 
-        val joke = Joke(setOf("dev"), "123", "Sample joke")
-        `when`(jokeService.getRandomJoke(null)).thenReturn(joke)
+        val jokeResponse = JokeResponse(setOf("dev"), "123", "Sample joke")
+        `when`(jokeService.getRandomJoke(null)).thenReturn(jokeResponse)
 
         val expectedResponse = """
             {
@@ -44,8 +44,8 @@ class JokesControllerApiTest {
     @Test
     fun `should fetch random joke by category`() {
 
-        val joke = Joke(setOf("dev"), "123", "Sample joke")
-        `when`(jokeService.getRandomJoke("dev")).thenReturn(joke)
+        val jokeResponse = JokeResponse(setOf("dev"), "123", "Sample joke")
+        `when`(jokeService.getRandomJoke("dev")).thenReturn(jokeResponse)
 
         val expectedResponse = """
             {
@@ -79,8 +79,8 @@ class JokesControllerApiTest {
 
     @Test
     fun `should search jokes`() {
-        val jokes = setOf(Joke(setOf("dev"), "123", "Sample joke"), Joke(setOf("dev"), "1234", "Sample joke 2"))
-        `when`(jokeService.searchJokes("joke")).thenReturn(jokes)
+        val jokeResponses = setOf(JokeResponse(setOf("dev"), "123", "Sample joke"), JokeResponse(setOf("dev"), "1234", "Sample joke 2"))
+        `when`(jokeService.searchJokes("joke")).thenReturn(jokeResponses)
 
         val expectedResponse = """
             [

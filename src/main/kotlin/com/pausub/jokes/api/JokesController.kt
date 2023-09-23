@@ -1,6 +1,6 @@
 package com.pausub.jokes.api
 
-import com.pausub.jokes.api.model.Joke
+import com.pausub.jokes.api.model.JokeResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 class JokesController(private val jokeService: JokesService) {
 
     @GetMapping("/random")
-    fun getRandomJoke(@RequestParam(name = "category", required = false) category: String?): Joke {
+    fun getRandomJoke(@RequestParam(name = "category", required = false) category: String?): JokeResponse {
         return jokeService.getRandomJoke(category)
     }
 
@@ -19,7 +19,7 @@ class JokesController(private val jokeService: JokesService) {
     }
 
     @GetMapping("/search")
-    fun searchJokes(@RequestParam(name = "query") query: String): Set<Joke> {
+    fun searchJokes(@RequestParam(name = "query") query: String): Set<JokeResponse> {
         return jokeService.searchJokes(query)
     }
 }

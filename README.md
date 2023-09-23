@@ -7,6 +7,10 @@ A Spring Boot RESTful application that serves as a proxy to a https://api.chuckn
  - List Joke Categories: Get a list of all available joke categories.
  - Search for Jokes: Search for jokes based on specific keywords.
 
+## Build & Run
+
+TODO:
+
 ## Useful endpoints for development (most should be disabled in prod)
 
  - Swagger: http://localhost:8080/jokes/swagger-ui/index.html

@@ -1,7 +1,7 @@
 package com.pausub.jokes.api
 
-import com.pausub.jokes.api.model.ChuckJoke
-import com.pausub.jokes.api.model.ChuckJokesList
+import com.pausub.jokes.api.model.ChuckJokeResponse
+import com.pausub.jokes.api.model.ChuckJokesListResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpMethod.GET
 import org.springframework.http.RequestEntity
@@ -17,9 +17,9 @@ class ChuckJokesApiClient(private val restTemplate: RestTemplate) {
 
     private val baseUrl = "https://api.chucknorris.io/jokes"
 
-    fun getRandomJoke(category: String? = null): ChuckJoke {
+    fun getRandomJoke(category: String? = null): ChuckJokeResponse {
         val uri = URI(if (category != null) "$baseUrl/random?category=$category" else "$baseUrl/random")
-        val response = executeRequest<ChuckJoke>(uri)
+        val response = executeRequest<ChuckJokeResponse>(uri)
         return response.body ?: throw RuntimeException("Failed to fetch a joke")
     }
 
@@ -28,8 +28,8 @@ class ChuckJokesApiClient(private val restTemplate: RestTemplate) {
         return response.body ?: throw RuntimeException("Failed to fetch categories")
     }
 
-    fun searchJokes(query: String): Set<ChuckJoke> {
-        val response = executeRequest<ChuckJokesList>(URI("$baseUrl/search?query=$query"))
+    fun searchJokes(query: String): Set<ChuckJokeResponse> {
+        val response = executeRequest<ChuckJokesListResponse>(URI("$baseUrl/search?query=$query"))
         return response.body?.result ?: throw RuntimeException("Failed to fetch jokes")
     }
 

@@ -1,6 +1,6 @@
 package com.pausub.jokes.e2e
 
-import com.pausub.jokes.api.model.Joke
+import com.pausub.jokes.api.model.JokeResponse
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,14 +18,14 @@ class JokesEndToEndTest {
 
 	@Test
 	fun `should fetch random joke`() {
-		val response = restTemplate.getForEntity("/random", Joke::class.java)
+		val response = restTemplate.getForEntity("/random", JokeResponse::class.java)
 		assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
 		assertThat(response.body).isNotNull
 	}
 
 	@Test
 	fun `should fetch random joke by category`() {
-		val response = restTemplate.getForEntity("/random?category=dev", Joke::class.java)
+		val response = restTemplate.getForEntity("/random?category=dev", JokeResponse::class.java)
 		assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
 		assertThat(response.body?.categories?.contains("dev")).isTrue()
 	}
@@ -39,7 +39,7 @@ class JokesEndToEndTest {
 
 	@Test
 	fun `should search jokes`() {
-		val responseType = object : ParameterizedTypeReference<Set<Joke>>() {}
+		val responseType = object : ParameterizedTypeReference<Set<JokeResponse>>() {}
 		val response = restTemplate.exchange("/search?query=mugger", HttpMethod.GET, null, responseType)
 		assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
 		assertThat(response.body).hasSizeGreaterThan(0)

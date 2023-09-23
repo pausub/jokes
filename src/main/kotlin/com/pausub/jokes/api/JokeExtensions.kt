@@ -1,10 +1,10 @@
 package com.pausub.jokes.api
 
-import com.pausub.jokes.api.model.ChuckJoke
-import com.pausub.jokes.api.model.Joke
+import com.pausub.jokes.api.model.ChuckJokeResponse
+import com.pausub.jokes.api.model.JokeResponse
 
-fun ChuckJoke.toJoke(): Joke {
-    return Joke(
+fun ChuckJokeResponse.toJoke(): JokeResponse {
+    return JokeResponse(
         categories = categories.toSet(),
         id = id,
         value = value

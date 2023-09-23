@@ -2,7 +2,7 @@ package com.pausub.jokes.unit
 
 import com.pausub.jokes.api.ChuckJokesApiClient
 import com.pausub.jokes.api.JokesService
-import com.pausub.jokes.api.model.ChuckJoke
+import com.pausub.jokes.api.model.ChuckJokeResponse
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -23,7 +23,7 @@ class JokesServiceUnitTest {
 
     @Test
     fun `should fetch random joke`() {
-        val mockJoke = ChuckJoke(listOf("category"), "id", "value")
+        val mockJoke = ChuckJokeResponse(listOf("category"), "id", "value")
         `when`(apiClient.getRandomJoke(anyString())).thenReturn(mockJoke)
         val result = jokesService.getRandomJoke("category")
 
@@ -35,8 +35,8 @@ class JokesServiceUnitTest {
     @Test
     fun `should search jokes`() {
         val mockJokes = setOf(
-                ChuckJoke(listOf("category1"), "id1", "value1"),
-                ChuckJoke(listOf("category2"), "id2", "value2")
+                ChuckJokeResponse(listOf("category1"), "id1", "value1"),
+                ChuckJokeResponse(listOf("category2"), "id2", "value2")
         )
         `when`(apiClient.searchJokes("test")).thenReturn(mockJokes)
 
