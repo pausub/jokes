@@ -3,6 +3,7 @@ package com.pausub.jokes.api
 import com.pausub.jokes.api.model.ChuckJokeResponse
 import com.pausub.jokes.api.model.ChuckJokesListResponse
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.HttpMethod.GET
 import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
@@ -23,13 +24,15 @@ class ChuckJokesApiClient(private val restTemplate: RestTemplate) {
         return response.body ?: throw RuntimeException("Failed to fetch a joke")
     }
 
+    @Cacheable("jokes")
     fun getCategories(): Set<String> {
         val response = executeRequest<Set<String>>(URI("$baseUrl/categories"))
         return response.body ?: throw RuntimeException("Failed to fetch categories")
     }
 
+    @Cacheable("categories")
     fun searchJokes(query: String): Set<ChuckJokeResponse> {
-        val response = executeRequest<ChuckJokesListResponse>(URI("$baseUrl/search?query=$query"))
+        val response = executeRequest<ChuckJokesListResponse>(URI("$baseUrl/s   earch?query=$query"))
         return response.body?.result ?: throw RuntimeException("Failed to fetch jokes")
     }
 

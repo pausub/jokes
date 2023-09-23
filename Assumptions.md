@@ -6,7 +6,7 @@ Request/Response logging - spring default
 Additional logging on external operations request/responses
 
 #### Caching: 
-TODO:
+Implemented simple in memory caching for `getCategories` and `searchJokes` operations. For production application other cache providers could be used. Features like persistence, overflow to disk, horizontal scalability, advanced configuration and others could be considered.
 
 #### Testing:
 Prefer having unit, api, e2e/integration tests. E2e vs integration testing (mocking or not of 3rd party services) is a controversial topic and requires further discussions. It would be necessary to implement load testing before any optimization attempts.

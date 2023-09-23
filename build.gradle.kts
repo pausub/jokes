@@ -28,6 +28,8 @@ dependencies {
 
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+
 	testImplementation("io.cucumber:cucumber-java:7.14.0")
 	testImplementation("io.cucumber:cucumber-junit:7.14.0")
 	testImplementation("io.cucumber:cucumber-spring:7.14.0")
